@@ -5,7 +5,12 @@ from aiogram.types import Message, CallbackQuery
 from lexicon.lexicon_ru import LEXICON_RU, LEXICON_BUTTON_RU
 from keyboards.keyboards import (main_keyboard, news_keyboard,
                                  settings_keyboard, help_keyboard)
-from keyboards.inline_keyboards import menu_inline_keyboard, about_inline_keyboard
+from keyboards.inline_keyboards import (menu_inline_keyboard, about_inline_keyboard,
+                                        beef_burgers_keyboard, chicken_and_fish_burgers_keyboard,
+                                        rolls_keyboard, snacks_keyboard,
+                                        shrimps_keyboard, cold_drinks_keyboard,
+                                        hot_drinks_keyboard, dessert_keyboard,
+                                        sauces_keyboard, other_keyboard)
 
 router = Router()
 
@@ -64,62 +69,72 @@ async def command_about_handler(message: Message):
                          reply_markup=about_inline_keyboard)
 
 
-# Обработка нажатия на инлайн-кнопки
+# Обработка нажатия на инлайн-кнопки меню
 @router.callback_query(F.data == "beef_burgers")
 async def beef_burgers_callback_handler(call: CallbackQuery):
-    await call.message.answer(text=LEXICON_RU["beef_burgers"])
+    await call.message.answer(text=LEXICON_RU["beef_burgers"],
+                              reply_markup=beef_burgers_keyboard)
     await call.answer()
 
 
 @router.callback_query(F.data == "chicken_and_fish_burgers")
 async def chicken_and_fish_burgers_callback_handler(call: CallbackQuery):
-    await call.message.answer(text=LEXICON_RU["chicken_and_fish_burgers"])
+    await call.message.answer(text=LEXICON_RU["chicken_and_fish_burgers"],
+                              reply_markup=chicken_and_fish_burgers_keyboard)
     await call.answer()
 
 
 @router.callback_query(F.data == "rolls")
 async def rolls_callback_handler(call: CallbackQuery):
-    await call.message.answer(text=LEXICON_RU["rolls"])
+    await call.message.answer(text=LEXICON_RU["rolls"],
+                              reply_markup=rolls_keyboard)
     await call.answer()
 
 
 @router.callback_query(F.data == "snacks")
 async def snacks_callback_handler(call: CallbackQuery):
-    await call.message.answer(text=LEXICON_RU["snacks"])
+    await call.message.answer(text=LEXICON_RU["snacks"],
+                              reply_markup=snacks_keyboard)
     await call.answer()
 
 
 @router.callback_query(F.data == "shrimps")
 async def shrimps_callback_handler(call: CallbackQuery):
-    await call.message.answer(text=LEXICON_RU["shrimps"])
+    await call.message.answer(text=LEXICON_RU["shrimps"],
+                              reply_markup=shrimps_keyboard)
     await call.answer()
 
 
 @router.callback_query(F.data == "cold_drinks")
 async def cold_drinks_callback_handler(call: CallbackQuery):
-    await call.message.answer(text=LEXICON_RU["cold_drinks"])
+    await call.message.answer(text=LEXICON_RU["cold_drinks"],
+                              reply_markup=cold_drinks_keyboard)
     await call.answer()
 
 
 @router.callback_query(F.data == "hot_drinks")
 async def hot_drinks_callback_handler(call: CallbackQuery):
-    await call.message.answer(text=LEXICON_RU["hot_drinks"])
+    await call.message.answer(text=LEXICON_RU["hot_drinks"],
+                              reply_markup=hot_drinks_keyboard)
     await call.answer()
 
 
 @router.callback_query(F.data == "dessert")
 async def dessert_callback_handler(call: CallbackQuery):
-    await call.message.answer(text=LEXICON_RU["dessert"])
+    await call.message.answer(text=LEXICON_RU["dessert"],
+                              reply_markup=dessert_keyboard)
     await call.answer()
 
 
 @router.callback_query(F.data == "sauces")
 async def sauces_callback_handler(call: CallbackQuery):
-    await call.message.answer(text=LEXICON_RU["sauces"])
+    await call.message.answer(text=LEXICON_RU["sauces"],
+                              reply_markup=sauces_keyboard)
     await call.answer()
 
 
 @router.callback_query(F.data == "other")
 async def other_callback_handler(call: CallbackQuery):
-    await call.message.answer(text=LEXICON_RU["other"])
+    await call.message.answer(text=LEXICON_RU["other"],
+                              reply_markup=other_keyboard)
     await call.answer()
