@@ -1,14 +1,16 @@
 from aiogram import Router, F
 from aiogram.filters import CommandStart, Command
-from aiogram.types import Message
+from aiogram.types import Message, CallbackQuery
 
 from lexicon.lexicon_ru import LEXICON_RU, LEXICON_BUTTON_RU
 from keyboards.keyboards import (main_keyboard, news_keyboard,
                                  settings_keyboard, help_keyboard)
+from keyboards.inline_keyboards import menu_inline_keyboard, about_inline_keyboard
 
 router = Router()
 
 
+# Обработка нажатия на кнопки меню и обычные кнопки
 @router.message(CommandStart())
 @router.message(F.text == LEXICON_BUTTON_RU["home"])
 async def command_start_handler(message: Message):
@@ -19,7 +21,8 @@ async def command_start_handler(message: Message):
 @router.message(Command("menu"))
 @router.message(F.text == LEXICON_BUTTON_RU["menu"])
 async def command_catalog_handler(message: Message):
-    await message.answer(text=LEXICON_RU["/menu"])
+    await message.answer(text=LEXICON_RU["/menu"],
+                         reply_markup=menu_inline_keyboard)
 
 
 @router.message(Command("cart"))
@@ -57,4 +60,66 @@ async def command_help_handler(message: Message):
 
 @router.message(Command("about"))
 async def command_about_handler(message: Message):
-    await message.answer(text=LEXICON_RU["/about"])
+    await message.answer(text=LEXICON_RU["/about"],
+                         reply_markup=about_inline_keyboard)
+
+
+# Обработка нажатия на инлайн-кнопки
+@router.callback_query(F.data == "beef_burgers")
+async def beef_burgers_callback_handler(call: CallbackQuery):
+    await call.message.answer(text=LEXICON_RU["beef_burgers"])
+    await call.answer()
+
+
+@router.callback_query(F.data == "chicken_and_fish_burgers")
+async def chicken_and_fish_burgers_callback_handler(call: CallbackQuery):
+    await call.message.answer(text=LEXICON_RU["chicken_and_fish_burgers"])
+    await call.answer()
+
+
+@router.callback_query(F.data == "rolls")
+async def rolls_callback_handler(call: CallbackQuery):
+    await call.message.answer(text=LEXICON_RU["rolls"])
+    await call.answer()
+
+
+@router.callback_query(F.data == "snacks")
+async def snacks_callback_handler(call: CallbackQuery):
+    await call.message.answer(text=LEXICON_RU["snacks"])
+    await call.answer()
+
+
+@router.callback_query(F.data == "shrimps")
+async def shrimps_callback_handler(call: CallbackQuery):
+    await call.message.answer(text=LEXICON_RU["shrimps"])
+    await call.answer()
+
+
+@router.callback_query(F.data == "cold_drinks")
+async def cold_drinks_callback_handler(call: CallbackQuery):
+    await call.message.answer(text=LEXICON_RU["cold_drinks"])
+    await call.answer()
+
+
+@router.callback_query(F.data == "hot_drinks")
+async def hot_drinks_callback_handler(call: CallbackQuery):
+    await call.message.answer(text=LEXICON_RU["hot_drinks"])
+    await call.answer()
+
+
+@router.callback_query(F.data == "dessert")
+async def dessert_callback_handler(call: CallbackQuery):
+    await call.message.answer(text=LEXICON_RU["dessert"])
+    await call.answer()
+
+
+@router.callback_query(F.data == "sauces")
+async def sauces_callback_handler(call: CallbackQuery):
+    await call.message.answer(text=LEXICON_RU["sauces"])
+    await call.answer()
+
+
+@router.callback_query(F.data == "other")
+async def other_callback_handler(call: CallbackQuery):
+    await call.message.answer(text=LEXICON_RU["other"])
+    await call.answer()
